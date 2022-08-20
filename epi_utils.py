@@ -46,7 +46,7 @@ def learning_scheduler(train_loops, curr_ite, max_alpha=None):
 
 
 def get_train_data(domain):
-    _path = './T5_data/aggs/{}.json'.format(domain)
+    _path = './json_data/aggs/{}.json'.format(domain)
     _data = load_dataset('json', data_files=_path)['train']
     return _data
 
@@ -71,19 +71,19 @@ def write_log(device, input_list):
 
 def get_loader(split, batchsz, domain=None):
     if split == 'ds':
-        path = './T5_data/aggs/{}.json'.format(domain)
+        path = './json_data/aggs/{}.json'.format(domain)
         temp_data = load_dataset('json', data_files=path)['train']
         temp_loader = DataLoader(temp_data, shuffle=True, batch_size=batchsz)
         return temp_loader
 
     if split == 'FT_target':
-        path = './T5_data/test_support/{}.json'.format(domain)
+        path = './json_data/test_support/{}.json'.format(domain)
         temp_data = load_dataset('json', data_files=path)['train']
         temp_loader = DataLoader(temp_data, shuffle=True, batch_size=batchsz)
         return temp_loader
 
     if split == 'evaluation':
-        path = './T5_data/test_query/{}.json'.format(domain)
+        path = './json_data/test_query/{}.json'.format(domain)
         temp_data = load_dataset('json', data_files=path)['train']
         temp_loader = DataLoader(temp_data, shuffle=False, batch_size=batchsz)
         return temp_loader
