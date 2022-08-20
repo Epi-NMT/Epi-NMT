@@ -357,8 +357,8 @@ class EpisodicNMT:
                     )
                     bleu = self.fine_tune_target(test_domain)
                     afr_res.append(bleu)
-                write_log(args().gpu, bfr_res)
-                write_log(args().gpu, afr_res)
+#                 write_log(args().gpu, bfr_res)
+#                 write_log(args().gpu, afr_res)
 
         # Save Model
         #         if sum(afr_res) / len(afr_res) > best_res:
@@ -420,8 +420,8 @@ if __name__ == '__main__':
     domains = ['covid', 'bible', 'books', 'ECB', 'TED2013',
                'EMEA', 'Tanzil', 'KDE4', 'OpenSub16', 'JRC-Acquis']
 
-    write_log(args().gpu, [args().ds_lr, args().epi_lr, args().tgt_ft_lr])
-    write_log(args().gpu, domains)
+#     write_log(args().gpu, [args().ds_lr, args().epi_lr, args().tgt_ft_lr])
+#     write_log(args().gpu, domains)
 
     seen_domains = domains[5:]
     EpisodicNMT().warm_up()
