@@ -24,11 +24,11 @@ Place the file at the same directory of our .py files.
 
   - Transfer data from txt to json, run:
   
-      python create_data.py 
+        python create_data.py 
       
   - Train Epi-NMT:
   
-      python Epi_NMT_train.py --gpu 0 --batchsz 54 --ds_batchsz 54 --alpha 0.3 --warmup_iterations 3000 --test_every 3
+        python Epi_NMT_train.py --gpu 0 --batchsz 54 --ds_batchsz 54 --alpha 0.3 --warmup_iterations 3000 --test_every 3
       
   Note: Tune the batchsz and ds_batchsz according to your own device.
   
