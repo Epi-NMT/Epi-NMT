@@ -42,7 +42,6 @@ class SplitData:
             sentence1 = tokenizer(df.loc[i]['en'])
             tokens += len(sentence1['input_ids'])
             if tokens > toks['{}'.format(mode)]:
-                print('number of sentences in {}: {}, tokens: {}'.format(mode, i + 1, tokens))
                 df.loc[:i].to_json('./json_data/{}/{}.json'.format(mode, domain), orient='records', force_ascii=False,
                                    lines=True)
                 df = df.loc[i + 1:].reset_index(drop=True)
@@ -59,25 +58,23 @@ class SplitData:
             df = self.split_by_tokens(df, 'test_support', domain)
             df = df.sample(frac=1).reset_index(drop=True)
             self.split_by_tokens(df, 'test_query', domain)
-            print('\n')
         else:
             df = self.split_by_tokens(df, 'test_support', domain)
             df = df.sample(frac=1).reset_index(drop=True)
             self.split_by_tokens(df, 'test_query', domain)
-        print('\n')
 
     def workflow(self):
         # create seen domain data
         for domain in seen:
             data = self.text2json(domain)
-            print('Seen Domain: {}, Total Number of Sentences: {}'.format(domain, len(data)), '\n')
             self.split_train_test(data, True, domain)
+            print('Done Seen Domain {}'.format(domain))
 
         # create unseen domain data
-        # for domain in unseen:
-        #     data = self.text2json(domain)
-        #     print('Unseen Domain: {}, Total Number of Sentences: {}'.format(domain, len(data)), '\n')
-        #     self.split_train_test(data, False, domain)
+        for domain in unseen:
+            data = self.text2json(domain)
+            self.split_train_test(data, False, domain)
+            print('Done Unseen Domain {}'.format(domain))
 
         # create domain aggregation data
         df = pd.DataFrame([])
@@ -88,10 +85,9 @@ class SplitData:
                 curr_df = pd.read_json(path, orient='records', encoding='utf-8', lines=True)
                 df = df.append(curr_df)
                 domain_df = domain_df.append(curr_df)
-            print(domain, len(domain_df))
             domain_df.to_json('./json_data/aggs/{}.json'.format(domain), orient='records', force_ascii=False, lines=True)
-        print(len(df))
         df.to_json('./json_data/aggs/train.json', orient='records', force_ascii=False, lines=True)
+        print('Done Aggregation all Training Data.')
 
 
 if __name__ == '__main__':
