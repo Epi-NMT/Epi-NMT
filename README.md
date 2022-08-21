@@ -31,4 +31,6 @@ Place the file at the same directory of our .py files.
       python Epi_NMT_train.py --gpu 0 --batchsz 54 --ds_batchsz 54 --alpha 0.3 --warmup_iterations 3000 --test_every 3
       
   Note: Tune the batchsz and ds_batchsz according to your own device.
+  
+   A single RTX 3090 GPU spent 30+ hours for training. 
     
