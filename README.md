@@ -11,6 +11,8 @@ For your convenience, you can download them via the google drive:
 
 https://drive.google.com/file/d/1CRA5YK9vBT86a7jbQTc3_jfBZ0PDJJtb/view?usp=sharing
 
+Place the file at the same directory of our .py files.
+
 > To reproduce the paper
 
   - Implementation environment: 
